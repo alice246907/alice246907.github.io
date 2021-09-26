@@ -8,13 +8,10 @@ function getRestaurants(){
         credentials: 'include', 
         mode: 'cors',
         headers: {
-            Accept: "application/json",
             "Content-Type": "application/json",
-            "Access-Control-Allow-Credentials": true,
         },
       }).then(res =>  res.json())
       .then((data) => {console.log(data)})
-      .catch((err) => {console.log("err:"+err)})
+      .catch((err) => {console.log(err)})
 };
-
 
