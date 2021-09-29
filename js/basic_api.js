@@ -1,10 +1,11 @@
-const api_url = "https://in-food.herokuapp.com/";
+const apiUrl = "https://in-food.herokuapp.com/";
+const pageSize = 3;
 
 
-
+// for basic_api/restaurant.html
 function getRestaurants(){
-    var form_value = document.forms["searchRestaurant"];
-    var word = form_value.elements.word.value;
+    var formValue = document.forms["searchRestaurant"];
+    var word = formValue.elements.word.value;
     $("#restaurantTable").find('tbody').html("");
 
     $("#searchRestaurant").ajaxSubmit(function(restaurants) {
@@ -18,11 +19,57 @@ function getRestaurants(){
 
 function getRestaurantById(restaurant){
     $.ajax({
-        url: api_url+"api/v1/restaurant/"+restaurant.id,
+        url: apiUrl+"api/v1/restaurant/"+restaurant.id,
         context: document.body,
     }).then((res)=>{
         var row = $('<tr><td>' + restaurant.restaurantName + '</td><td>' + restaurant.phoneNumber+ '</td><td>' + restaurant.address  + '</td><td><pre><code>' + JSON.stringify(restaurant, null, '  ') + '</code></pre></td><td><pre><code>' + JSON.stringify(res, null, '  ') + '</code></pre></td></tr>') 
         $("#restaurantTable").find('tbody').append(row);
         $('#restaurantTable').trigger('footable_initialize');
+    })
+}
+
+
+// for basic_api/user.html
+async function getUsers(){
+    var formValue = document.forms["searchUser"];
+    var word = formValue.elements.word.value;
+    $("#userTable").find('tbody').html("");
+    for(var i=0; i<pageSize; i++){
+        await $.ajax({
+            url: apiUrl + "api/v1/user/search",
+            context: document.body,
+            method: "GET",
+            data:{
+                "name": word,
+                "myId": "ff5eae68-3f21-44ad-b1fd-80ade65100c0", // fix id
+                "page": i,
+                "size": pageSize
+            }
+        }).then((res)=>{
+            if(res.userVOList){
+                getMyProfileById(res.userVOList[0].userId); // search by ID
+            }
+        })
+    }
+}
+
+async function getMyProfileById(id){
+    await $.ajax({
+        url: apiUrl + "api/v1/user/my/" + id,
+        context: document.body,
+    }).then((res)=>{
+        getUserByFirebaseId(res); // search by firebase ID
+    })
+}
+
+async function getUserByFirebaseId(idDetail){
+    await $.ajax({
+        url: apiUrl + "api/v1/user/firebaseId/" + idDetail.firebaseId,
+        context: document.body,
+    }).then((res)=>{
+        var row = $('<tr><td>' + res.displayName + '</td><td>' + res.userName  + '</td><td><pre><code>' + JSON.stringify(idDetail, null, '  ') + '</code></pre></td><td><pre><code>' + JSON.stringify(res, null, '  ') + '</code></pre></td></tr>') 
+        $("#userTable").find('tbody').append(row);
+        $('#userTable').trigger('footable_initialize'); 
+        return res;
     })
 }
