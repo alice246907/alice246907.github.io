@@ -20,11 +20,9 @@ function getRestaurantById(restaurant){
     $.ajax({
         url: api_url+"api/v1/restaurant/"+restaurant.id,
         context: document.body,
-        async:true,
-        success: function(res){
-            var row = $('<tr><td>' + restaurant.restaurantName + '</td><td>' + restaurant.phoneNumber+ '</td><td>' + restaurant.address  + '</td><td>' + JSON.stringify(restaurant) + '</td><td>' + JSON.stringify(res) + '</td></tr>')
-            $("#restaurantTable").find('tbody').append(row);
-            $('#restaurantTable').trigger('footable_initialize');
-        }
+    }).then((res)=>{
+        var row = $('<tr><td>' + restaurant.restaurantName + '</td><td>' + restaurant.phoneNumber+ '</td><td>' + restaurant.address  + '</td><td><pre><code>' + JSON.stringify(restaurant, null, '  ') + '</code></pre></td><td><pre><code>' + JSON.stringify(res, null, '  ') + '</code></pre></td></tr>') 
+        $("#restaurantTable").find('tbody').append(row);
+        $('#restaurantTable').trigger('footable_initialize');
     })
 }
