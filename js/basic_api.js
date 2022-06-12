@@ -67,7 +67,7 @@ async function getUserByFirebaseId(idDetail){
         url: apiUrl + "api/v1/user/firebaseId/" + idDetail.firebaseId,
         context: document.body,
     }).then((res)=>{
-        var row = $('<tr><td>' + res.displayName + '</td><td>' + res.userName  + '</td><td><pre><code>' + JSON.stringify(idDetail, null, '  ') + '</code></pre></td><td><pre><code>' + JSON.stringify(res, null, '  ') + '</code></pre></td></tr>') 
+        var row = $('<tr><td>' + res.displayName + '</td><td>' + res.username  + '</td><td><pre><code>' + JSON.stringify(idDetail, null, '  ') + '</code></pre></td><td><pre><code>' + JSON.stringify(res, null, '  ') + '</code></pre></td></tr>') 
         $("#userTable").find('tbody').append(row);
         $('#userTable').trigger('footable_initialize'); 
         return res;
