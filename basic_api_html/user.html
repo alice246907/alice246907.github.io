@@ -31,12 +31,12 @@
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-sm-12">
-                                <form role="form" name="searchUser" id="searchUser" onsubmit = "getUsers();return false;">
+                                <form role="form" name="searchUser" id="searchUser" onsubmit = "formSearchUser();return false;">
                                     <div class="form-group">
                                         <input type="text" name="word" placeholder="Search..." class="form-control">
                                     </div>
                                     <div>
-                                        <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Search</strong>
+                                        <button class="btn btn-sm btn-primary pull-right m-t-n-xs" id="searchUserBtn" type="submit"><strong>Search</strong>
                                         </button>
                                     </div>
                                 </form>
@@ -46,7 +46,6 @@
                 </div>
             </div>
         </div>
-        
         <div class="row">
             <div class="col-sm-12">
                 <table  id="userTable" class="footable table table-stripped toggle-arrow-tiny" data-page-size="10">
@@ -83,7 +82,7 @@
 
     <!-- 自定义js -->
     <script src="../js/content.js?v=1.0.0"></script>
-    <script src="../js/basic_api.js"></script>
+    <script src="../basic_api_js/user_api.js"></script>
     
     <script>
         $(document).ready(function() {

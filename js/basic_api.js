@@ -29,51 +29,6 @@ function getRestaurantById(restaurant){
 }
 
 
-// for basic_api/user.html
-async function getUsers(){
-    var formValue = document.forms["searchUser"];
-    var word = formValue.elements.word.value;
-    $("#userTable").find('tbody').html("");
-    for(var i=0; i<pageSize; i++){
-        await $.ajax({
-            url: apiUrl + "api/v1/user/search",
-            context: document.body,
-            method: "GET",
-            data:{
-                "name": word,
-                "myId": "ff5eae68-3f21-44ad-b1fd-80ade65100c0", // fix id
-                "page": i,
-                "size": pageSize
-            }
-        }).then((res)=>{
-            if(res.userVOList){
-                getMyProfileById(res.userVOList[0].userId); // search by ID
-            }
-        })
-    }
-}
-
-async function getMyProfileById(id){
-    await $.ajax({
-        url: apiUrl + "api/v1/user/my/" + id,
-        context: document.body,
-    }).then((res)=>{
-        getUserByFirebaseId(res); // search by firebase ID
-    })
-}
-
-async function getUserByFirebaseId(idDetail){
-    await $.ajax({
-        url: apiUrl + "api/v1/user/firebaseId/" + idDetail.firebaseId,
-        context: document.body,
-    }).then((res)=>{
-        var row = $('<tr><td>' + res.displayName + '</td><td>' + res.username  + '</td><td><pre><code>' + JSON.stringify(idDetail, null, '  ') + '</code></pre></td><td><pre><code>' + JSON.stringify(res, null, '  ') + '</code></pre></td></tr>') 
-        $("#userTable").find('tbody').append(row);
-        $('#userTable').trigger('footable_initialize'); 
-        return res;
-    })
-}
-
 // for basic_api/post.html
 async function searchRestaurant(restaurantName){
     var restaurantList = [];
@@ -145,28 +100,6 @@ async function getPostByUserId(userId){
         posts = res;
     })
     return posts;
-}
-
-async function searchUser(word){
-    var userList = [];
-    for(var i=0; i<pageSize; i++){
-        await $.ajax({
-            url: apiUrl + "api/v1/user/search",
-            context: document.body,
-            method: "GET",
-            data:{
-                "name": word,
-                "myId": "ff5eae68-3f21-44ad-b1fd-80ade65100c0", // fix id
-                "page": i,
-                "size": pageSize
-            }
-        }).then((res)=>{
-            if(res.userVOList){
-                userList = userList.concat(res.userVOList)
-            }
-        })
-    }
-    return userList;
 }
 
 async function SearchPostByUser(){
