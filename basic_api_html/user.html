@@ -20,7 +20,7 @@
 
 </head>
 
-<body class="gray-bg">
+<body class="gray-bg" onload="OnLoad();">
     <div class="wrapper wrapper-content">
         <div class="row">
             <div class="col-sm-12">
@@ -33,7 +33,7 @@
                             <div class="col-sm-12">
                                 <form role="form" name="searchUser" id="searchUser" onsubmit = "formSearchUser();return false;">
                                     <div class="form-group">
-                                        <input type="text" name="word" placeholder="Search..." class="form-control">
+                                        <input type="text" name="word" placeholder="Search..." class="form-control" oninput="searchUserOnInput();">
                                     </div>
                                     <div>
                                         <button class="btn btn-sm btn-primary pull-right m-t-n-xs" id="searchUserBtn" type="submit"><strong>Search</strong>

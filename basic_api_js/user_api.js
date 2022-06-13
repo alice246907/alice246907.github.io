@@ -1,6 +1,16 @@
 const apiUrl = "https://in-food.herokuapp.com/";
 const pageSize = 2;
 
+function OnLoad(){
+    document.forms["searchUser"].word.value = sessionStorage.getItem("searchUser");
+}
+
+function searchUserOnInput(){
+    var word = document.forms["searchUser"].elements.word.value;
+    sessionStorage.setItem("searchUser", word);
+}
+
+
 function formSearchUser(){
     var formValue = document.forms["searchUser"];
     var word = formValue.elements.word.value;
