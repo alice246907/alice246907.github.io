@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Report</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/plugins/footable/footable.core.css" rel="stylesheet">
+
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg" onload="OnLoad();">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="col-sm-12 text-center">Report</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form role="form" name="searchReport" id="searchReport" onsubmit = "getReport();return false;">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">isCheck</label>
+                                        <div class="col-sm-10 radio">
+                                                <label>
+                                                    <input type="radio" checked="" value="true" id="reportOptionsRadios1" name="reportOptionsRadios">true</label>
+                                                <label>
+                                                    <input type="radio" value="false" id="reportOptionsRadios2" name="reportOptionsRadios">false</label>
+                                                <label>
+                                                    <input type="radio" value="" id="reportOptionsRadios3" name="reportOptionsRadios">both</label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-primary pull-right m-t-n-xs" id="searchReportBtn" type="submit"><strong>Search</strong>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <table  id="reportTable" class="footable table table-stripped toggle-arrow-tiny" data-page-size="10">
+                    <thead>
+                    <tr>
+
+                        <th data-toggle="true">Create Day</th>
+                        <th>Create Time</th>
+                        <th>Reason</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <ul class="pagination pull-right"></ul>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        
+
+    </div>
+
+    <!-- 全局js -->
+    <script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../js/jquery.form.js"></script>
+    <script src="../js/plugins/footable/footable.all.min.js"></script>
+
+    <!-- 自定义js -->
+    <script src="../js/content.js?v=1.0.0"></script>
+    <script src="../basic_api_js/report_api.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+
+            $('.footable').footable();
+            $('.footable2').footable();
+
+        });
+
+    </script>    
+    
+
+</body>
+
+</html>

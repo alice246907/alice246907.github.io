@@ -25,6 +25,7 @@ function formSearchUser(){
             document.getElementById("searchUserBtn").disabled = false;
         }
         else{
+            var rows = [];
             userList.forEach(user => {
                 getUserProfileByIdApi(user.userId).then(profile=>{
                     document.getElementById("searchUserBtn").disabled = true;
